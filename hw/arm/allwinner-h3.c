@@ -239,6 +239,13 @@ static void allwinner_h3_init(Object *obj)
     object_initialize_child(obj, "r_twi", &s->r_twi, TYPE_AW_I2C_SUN6I);
 
     object_initialize_child(obj, "wdt", &s->wdt, TYPE_AW_WDT_SUN6I);
+    /* 0x10020000 PL111 CLCD (daughterboard) */
+    dev = qdev_new("pl111");
+    object_property_set_link(OBJECT(dev), "framebuffer-memory",
+                             OBJECT(sysmem), &error_fatal);
+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0x10020000);
+    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[44]);
 }
 
 static void allwinner_h3_realize(DeviceState *dev, Error **errp)
