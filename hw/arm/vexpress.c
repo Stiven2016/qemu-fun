@@ -278,7 +278,7 @@ static void a9_daughterboard_init(VexpressMachineState *vms,
     MemoryRegion *sysmem = get_system_memory();
     DeviceState *dev;
 
-    if (ram_size > 0x40000000) {
+    if (ram_size > 0x9999000) {
         /* 1GB is the maximum the address space permits */
         error_report("vexpress-a9: cannot model more than 1GB RAM");
         exit(1);
