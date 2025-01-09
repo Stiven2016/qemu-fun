@@ -33,6 +33,7 @@
 #include "target/arm/cpu-qom.h"
 #include "target/arm/gtimer.h"
 #include "hw/display/pl110.c"
+#include "hw/arm/primecell.h"
 
 /* Memory map */
 const hwaddr allwinner_h3_memmap[] = {
